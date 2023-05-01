@@ -1,0 +1,69 @@
+﻿@page "/"
+@using RaceTracker.Data;
+@inject RacePredictions racePredictions
+@inject TimeComputer timeComputer
+
+<PageTitle>Race Tracker</PageTitle>
+
+
+<form id="timeGrid">
+    <div>
+        <label class="header">Section</label>
+        <label class="header">Predicted</label>
+        <label class="header">Actual</label>
+        <label class ="header">Action</label>
+    </div>
+
+    <div>
+        <label>Start Time</label>
+        <input type="time" id="startTime" name="startTime" @bind-value=timeComputer.StartTime />
+        <button id="startButton" @onclick=timeComputer.SetStartTime class="button-3 greenButton" role="button">Start</button>
+    </div>
+
+    <div>
+        <label>Swim Time</label>
+        <input type="time" id="predictedSwimFinishTime" name="predictedSwimFinishTime" @bind-value=timeComputer.PredictedSwimFinishTime />
+        <input type="time" id="actualSwimFinishTime" name="actualSwimFinishTime" @bind-value=@timeComputer.ActualSwimFinishTime />
+        <button @onclick=timeComputer.SetSwimTime class="button-3 greenButton" role="button">Finished Swim</button>
+    </div>
+  
+    <div>
+        <label>T1 Time</label>
+        <input type="time" id="predictedT1FinishTime" name="predictedT1FinishTime" @bind-value=timeComputer.PredictedT1FinishTime />
+        <input type="time" id="actualT1FinishTime" name="actualT1FinishTime" @bind-value=@timeComputer.ActualT1FinishTime />
+        <button @onclick=timeComputer.SetT1Time class="button-3 greenButton" role="button">Finished T1</button>
+    </div>
+
+    <div>
+        <label>Bike Time</label>
+        <input type="time" id="predictedBikeFinishTime" name="predictedBikeFinishTime" @bind-value=timeComputer.PredictedBikeFinishTime />
+        <input type="time" id="actualBikeFinishTime" name="actualBikeFinishTime" @bind-value=@timeComputer.ActualBikeFinishTime />
+        <button @onclick=timeComputer.SetBikeTime class="button-3 greenButton" role="button">Finished Bike</button>
+    </div>
+
+    <div>
+        <label>T2 Time</label>
+        <input type="time" id="predictedT2FinishTime" name="predictedT2FinishTime" @bind-value=timeComputer.PredictedT2FinishTime />
+        <input type="time" id="actualT2FinishTime" name="actualT2FinishTime" @bind-value=@timeComputer.ActualT2FinishTime />
+        <button @onclick=timeComputer.SetT2Time class="button-3 greenButton" role="button">Finished T2</button>
+    </div>
+
+    <div>
+        <label>Run Time</label>
+        <input type="time" id="predictedRunFinishTime" name="predictedRunFinishTime" @bind-value=timeComputer.PredictedRunFinishTime />
+        <input type="time" id="actualRunFinishTime" name="actualRunFinishTime" @bind-value=@timeComputer.ActualRunFinishTime />
+        <button @onclick=timeComputer.SetRunTime class="button-3 greenButton" role="button">Finished Run</button>
+    </div>
+</form>
+
+<p>Predicted Finish Time: @(timeComputer.PredictedRunFinishTime.ToString(@"hh\:mm"))</p>
+
+<button @onclick=timeComputer.ResetAll class="button-3 redButton" role="button">Reset All</button>
+
+<div id="predictionContainer">
+    <h3>Predictions</h3>
+    <p>Swim: @(racePredictions.SwimTime)</p>
+    <p>Bike: @(racePredictions.BikeTime)</p>
+    <p>Run: @(racePredictions.RunTime)</p>
+</div>
+
